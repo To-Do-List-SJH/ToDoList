@@ -43,6 +43,7 @@ public class ToDoItemTest {
     assertEquals("getDescription", "Test description", item.getDescription());
     assertEquals("getId", -1, item.getId());
     assertFalse("getDone", item.isDone());
+    assertEquals("getDate", "Test date", item.getDate());
   }
 
   /**
@@ -54,6 +55,7 @@ public class ToDoItemTest {
     assertEquals("getDescription", "Test description 2", item.getDescription());
     assertEquals("getId", -1, item.getId());
     assertTrue("getDone", item.isDone());
+    assertEquals("getDate", "Test date 2", item.getDate());
   }
 
   /**
@@ -72,6 +74,11 @@ public class ToDoItemTest {
   public void testGetDescription() {
     ToDoItem item = new ToDoItem(2, "Test description");
     assertEquals("getDescription", "Test description", item.getDescription());
+  }
+  @Test
+  public void testGetDate() {
+    ToDoItem item = new ToDoItem(2, "Test date");
+    assertEquals("getDate", "Test date", item.getDate());
   }
 
   /**

@@ -1,4 +1,8 @@
 package com.mrjaffesclass.apcs.todolist;
+
+import java.text.ParseException;
+import java.util.Date;
+
 /**
  * To do item
  * 
@@ -15,16 +19,19 @@ public class ToDoItem {
   private int id;               
   private String description;
   private boolean done;
+  private Date date;
   
   /**
    * Constructor with done set to false in constructor
    * @param _id           ID number of to do item
    * @param _description  Description of to do item
+   * @param _date;
    */
-  public ToDoItem(int _id, String _description) {
+  public ToDoItem(int _id, String _description, String _date) {
     description = _description;
     id = _id;
     done = false;     // Default to not completed
+    date = _date;
   }
 
   /**
@@ -38,13 +45,40 @@ public class ToDoItem {
     id = _id;
     done = _done;     // Default to not completed
   }
-
+  
+  /**
+   * Constructor
+   * @param _id           ID number of to do item
+   * @param _description  Description of to do item
+   * @param _done         Done flag
+   */
+  public ToDoItem(int _id, String _description) {
+    description = _description;
+    id = _id;
+    done = false;     // Default to not completed
+  }
+  
+  private Date calcDate(String _input)
+  {
+      Date date= new Date(null);
+      try {
+          date = format.parse(_input);
+      } catch (ParseException ex) 
+      {
+      }
+      return date;
+  }
+  
   /**
    * Get the to do item description
    * @return The description of to do item
    */
   public String getDescription() {
     return description;
+  }
+  
+  public String getDate() {
+      return date;
   }
 
   /**
@@ -53,6 +87,9 @@ public class ToDoItem {
    */
   public void setDescription(String description) {
     this.description = description;
+  }
+  public void setDate(String date){
+      this.date = date;
   }
 
   /**

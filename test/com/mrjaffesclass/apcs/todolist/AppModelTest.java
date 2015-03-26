@@ -157,9 +157,8 @@ public class AppModelTest {
   */
   public AppModel addSampleItems(AppModel model) {
     for (String description : initialData) {
-      model.putItem (new ToDoItem(-1, description));
+      model.putItem (new ToDoItem(-1, description, false));
     }
     return model;
   }
-  
 }
