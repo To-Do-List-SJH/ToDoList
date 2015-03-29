@@ -1,6 +1,7 @@
 package com.mrjaffesclass.apcs.todolist;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -19,7 +20,8 @@ public class ToDoItem {
   private int id;               
   private String description;
   private boolean done;
-  private Date date;
+  private Date date = new Date();
+  private SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d");
   
   /**
    * Constructor with done set to false in constructor
@@ -27,7 +29,7 @@ public class ToDoItem {
    * @param _description  Description of to do item
    * @param _date;
    */
-  public ToDoItem(int _id, String _description, String _date) {
+  public ToDoItem(int _id, String _description, Date _date) {
     description = _description;
     id = _id;
     done = false;     // Default to not completed
@@ -58,16 +60,7 @@ public class ToDoItem {
     done = false;     // Default to not completed
   }
   
-  private Date calcDate(String _input)
-  {
-      Date date= new Date(null);
-      try {
-          date = format.parse(_input);
-      } catch (ParseException ex) 
-      {
-      }
-      return date;
-  }
+ 
   
   /**
    * Get the to do item description
@@ -77,7 +70,11 @@ public class ToDoItem {
     return description;
   }
   
-  public String getDate() {
+  public String getStringDate() {
+      return sdf.format(date);
+  }
+  public Date getDate()
+  {
       return date;
   }
 
@@ -88,7 +85,7 @@ public class ToDoItem {
   public void setDescription(String description) {
     this.description = description;
   }
-  public void setDate(String date){
+  public void setDate(Date date){
       this.date = date;
   }
 
@@ -137,7 +134,9 @@ public class ToDoItem {
    */
   public void merge(ToDoItem anotherItem) {
     this.setDescription(anotherItem.getDescription());
-    this.setDone(anotherItem.isDone());    
+    this.setDone(anotherItem.isDone()); 
+    this.setDate(anotherItem.getDate());
+    
   }
 
 }
