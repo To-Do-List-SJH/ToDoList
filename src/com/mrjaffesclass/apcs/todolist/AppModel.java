@@ -39,6 +39,8 @@ public class AppModel implements MessageHandler {
     messenger.subscribe("saveItem", this);
     messenger.subscribe("deleteItem", this);
     messenger.subscribe("removeCompletedItems", this);
+    messenger.subscribe("organizeUp", this);
+    messenger.subscribe("organizeDown", this);
   }
 
   // This method implements the messageHandler method defined in
@@ -91,6 +93,37 @@ public class AppModel implements MessageHandler {
         removeCompletedItems();
         messenger.notify("saved");
         messenger.notify("items", this.getItems());
+          break;
+      
+      case "organizeUp":
+          boolean notFinished;
+        do {
+            notFinished = false;
+            for (int j = 0; j < toDoList.size() - 1; j++) {
+                if (toDoList.get(j).getDate().compareTo(toDoList.get(j+1).getDate()) == 1) {
+                    ToDoItem temp = toDoList.get(j);
+                    toDoList.set(j, toDoList.get(j+1));
+                    toDoList.set(j+1, temp);
+                    notFinished = true;
+                }
+            }
+        } while (notFinished);
+          messenger.notify("items", this.getItems(), true);
+          break; 
+      case "organizeDown":
+      boolean notFinished2;
+        do {
+            notFinished2 = false;
+            for (int j = 0; j < toDoList.size() - 1; j++) {
+                if (toDoList.get(j).getDate().compareTo(toDoList.get(j+1).getDate()) == -1) {
+                    ToDoItem temp = toDoList.get(j+1);
+                    toDoList.set(j+1, toDoList.get(j));
+                    toDoList.set(j, temp);
+                    notFinished = true;
+                }
+            }
+        } while (notFinished2);
+          messenger.notify("items", this.getItems(), true);
     }
   }
 
