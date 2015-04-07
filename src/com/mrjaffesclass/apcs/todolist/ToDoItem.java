@@ -1,6 +1,5 @@
 package com.mrjaffesclass.apcs.todolist;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -52,7 +51,6 @@ public class ToDoItem {
    * Constructor
    * @param _id           ID number of to do item
    * @param _description  Description of to do item
-   * @param _done         Done flag
    */
   public ToDoItem(int _id, String _description) {
     description = _description;

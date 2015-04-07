@@ -17,7 +17,7 @@ public class AppModel implements MessageHandler {
   private final Messenger messenger;
   private final ArrayList<ToDoItem> toDoList;   
   private int nextId = 0;                 
-  
+  private boolean notFinished = false;
   /**
    * Model constructor: Create the data representation of the program
    * @param _messenger Messaging class instantiated by the Controller for 
@@ -96,7 +96,6 @@ public class AppModel implements MessageHandler {
           break;
       
       case "organizeUp":
-          boolean notFinished;
         do {
             notFinished = false;
             for (int j = 0; j < toDoList.size() - 1; j++) {
@@ -110,10 +109,10 @@ public class AppModel implements MessageHandler {
         } while (notFinished);
           messenger.notify("items", this.getItems(), true);
           break; 
+      
       case "organizeDown":
-      boolean notFinished2;
         do {
-            notFinished2 = false;
+            notFinished = false;
             for (int j = 0; j < toDoList.size() - 1; j++) {
                 if (toDoList.get(j).getDate().compareTo(toDoList.get(j+1).getDate()) == -1) {
                     ToDoItem temp = toDoList.get(j+1);
@@ -122,7 +121,7 @@ public class AppModel implements MessageHandler {
                     notFinished = true;
                 }
             }
-        } while (notFinished2);
+        } while (notFinished);
           messenger.notify("items", this.getItems(), true);
     }
   }
