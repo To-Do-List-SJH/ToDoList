@@ -6,8 +6,8 @@ import java.util.Date;
 /**
  * To do item
  * 
- * @author Roger Jaffe
- * @version 1.0
+ * @author Jordan, Spenser, Haley
+ * @version final
  */
 public class ToDoItem {
 
@@ -15,6 +15,8 @@ public class ToDoItem {
    * id:          ID number of to do item. Assigned when added to list
    * description: Description of to do item
    * done:        True if to do item is complete
+   * date:        Allows the date to be edited
+   * sdf:         Date picker format for new items
    */
   private int id;               
   private String description;
@@ -26,12 +28,12 @@ public class ToDoItem {
    * Constructor with done set to false in constructor
    * @param _id           ID number of to do item
    * @param _description  Description of to do item
-   * @param _date;
+   * @param _date;        Date of to do item
    */
   public ToDoItem(int _id, String _description, Date _date) {
     description = _description;
     id = _id;
-    done = false;     // Default to not completed
+    done = false;     
     date = _date;
   }
 
@@ -67,10 +69,17 @@ public class ToDoItem {
   public String getDescription() {
     return description;
   }
-  
+  /**
+   * Get the to do item date
+   * @return The date from the string
+   */
   public String getStringDate() {
       return sdf.format(date);
   }
+  /**
+   * Get the to do item date
+   * @return The date of to do item
+   */
   public Date getDate()
   {
       return date;
@@ -83,6 +92,10 @@ public class ToDoItem {
   public void setDescription(String description) {
     this.description = description;
   }
+  /**
+   * Set the to do item date
+   * @param date The date to be set
+   */
   public void setDate(Date date){
       this.date = date;
   }

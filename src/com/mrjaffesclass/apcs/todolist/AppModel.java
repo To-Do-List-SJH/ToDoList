@@ -5,8 +5,8 @@ import com.mrjaffesclass.apcs.messenger.*;
 
 /**
  * The model represents the data that the app uses.
- * @author Roger Jaffe
- * @version 1.0
+ * @author Spenser, Haley, Jordan
+ * @version final
  */
 public class AppModel implements MessageHandler {
   // Instance variables
@@ -14,6 +14,8 @@ public class AppModel implements MessageHandler {
   // toDoList:    Keeps the list of to do items
   // nextId:      Keeps track of the ID that should be given to the next 
   //              ToDoItem that's added to the list
+  
+  // notFinished: Initiation of sort while loop
   private final Messenger messenger;
   private final ArrayList<ToDoItem> toDoList;   
   private int nextId = 0;                 
@@ -58,13 +60,12 @@ public class AppModel implements MessageHandler {
         messenger.notify("items", this.getItems(), true);
         break;
         
-      // Somebody has asked for an individual item
-      // Find the item and send it back
+      // sends back individually picked item
       case "getItem":
         messenger.notify("item", this.getItem((int)messagePayload), true);
         break;
         
-      // Somebody wants us to save an item
+      // allows user to save an item
       // Grab the to do item from the payload, save or update it to the 
       // to do list, send a confirmation message that it was saved
       // and send the updated to do list to others
@@ -75,7 +76,7 @@ public class AppModel implements MessageHandler {
         messenger.notify("items", this.getItems(), true); 
         break;
         
-      // Somebody wants us to delete an item
+      // allows user to delete an item
       // Grab the to do item from the payload, delete it from
       // to do list, send a confirmation message that it was saved
       // and send the updated to do list to others
@@ -86,8 +87,8 @@ public class AppModel implements MessageHandler {
         messenger.notify("items", this.getItems(), true);
         break;
         
-      // We've been told to remove all items that have their 'done' flag
-      // set.  Do it, then send a confirmation message, then send the
+      // Deletes all checked and completeed items
+      //  Do it, then send a confirmation message, then send the
       // updated to do list to others
       case "removeCompletedItems":
         removeCompletedItems();
@@ -95,6 +96,9 @@ public class AppModel implements MessageHandler {
         messenger.notify("items", this.getItems());
           break;
       
+      /**
+       * loop and method to sort items from earliest to latest dates
+       */
       case "organizeUp":
         do {
             notFinished = false;
@@ -110,6 +114,9 @@ public class AppModel implements MessageHandler {
           messenger.notify("items", this.getItems(), true);
           break; 
       
+      /**
+       * loop and method to sort items from latest to earliest dates
+       */
       case "organizeDown":
         do {
             notFinished = false;
@@ -160,13 +167,13 @@ public class AppModel implements MessageHandler {
   }
   
   /** 
-   * Add a new to do item to the list
+   * Adds a new to do item to the list
    * @param item To do item to add
    * @return Item added
    */
   public ToDoItem putItem(ToDoItem item) {
     if (item.getId() == -1) {
-      // Item is new, add it to the list
+      // Item is new, adds to the list
       item.setId(nextId);
       toDoList.add(item);
       nextId++;
@@ -179,7 +186,7 @@ public class AppModel implements MessageHandler {
   }
   
   /**
-   * Delete a to do item
+   * Deletes a to do item
    * @param id ID of the item to delete
    * @return True if the item was found and removed
    */
@@ -189,7 +196,7 @@ public class AppModel implements MessageHandler {
   }
 
   /**
-   * Delete a to do item
+   * Deletes a to do item
    * @param item ToDoItem to delete
    * @return true if the item was found and removed
    */
@@ -204,7 +211,7 @@ public class AppModel implements MessageHandler {
     // Create an empty list
     ArrayList<ToDoItem> newList = new ArrayList<>();
     
-    // Loop through the to do list and if isDone is false
+    // Loops through the to do list and if isDone is false
     // add it to the new list
     for (ToDoItem item : toDoList) {
       if (!item.isDone()) {

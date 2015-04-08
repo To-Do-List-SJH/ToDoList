@@ -5,8 +5,8 @@ import com.mrjaffesclass.apcs.messenger.*;
  * To do list controller.  The controller will bootstrap the app.  "Bootstrap"
  * means to create and load all the other classes in the app.
  *
- * @author Roger Jaffe
- * @version 1.0
+ * @author Jordan, Haley, Spenser
+ * @version final
  */
 public class AppController implements MessageHandler {
 
@@ -61,7 +61,7 @@ public class AppController implements MessageHandler {
   }
   
    /**
-   * Add some initial items to our to do list
+   * Adds initial items to the to do list
    */
   public void addSampleItems() {
     String[] initialData = {
@@ -81,8 +81,7 @@ public class AppController implements MessageHandler {
   }
 
   /**
-   * Remember that all Java programs are started with the main method in one
-   * of the program's classes.
+   * 
    * 
    * @param args No arguments are necessary for this to do list application
    */

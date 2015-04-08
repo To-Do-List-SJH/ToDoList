@@ -4,8 +4,8 @@ import com.mrjaffesclass.apcs.messenger.*;
 /**
  * View for editing to do items
  * 
- * @author Roger Jaffe
- * @version 1.0
+ * @author Haley, Jordan, Spenser
+ * @version final
  */
 public class EditView extends javax.swing.JDialog implements MessageHandler {
 
@@ -59,7 +59,7 @@ public class EditView extends javax.swing.JDialog implements MessageHandler {
   }
   
   /**
-   * Get editing fields from form and save in the item
+   * Gets editing fields from form and save in the item
    */
   private void getValues() {
     item.setDescription(descriptionText.getText());

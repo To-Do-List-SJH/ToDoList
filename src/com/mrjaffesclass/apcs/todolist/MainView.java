@@ -5,8 +5,8 @@ import javax.swing.table.*;
 import com.mrjaffesclass.apcs.messenger.*;
 /**
  * To do list main view
- * @author Roger Jaffe
- * @version 1.0
+ * @author Spenser, Haley, Jordan
+ * @version final
  * 
  */
 public class MainView extends javax.swing.JFrame implements MessageHandler {
@@ -39,19 +39,18 @@ public class MainView extends javax.swing.JFrame implements MessageHandler {
     this.setLocation(X_POSITION, Y_POSITION); // Set main window location
     initComponents();           // Create and init the GUI components
     
-    // Make adjustments to the column widths to suit our needs
-    // Remove the ID column and set the row height
+    // Here are the adjustments to the column widths to suit our needs
+    // we removed the id column for look and simplicity
     jTable1.getColumnModel().getColumn(DONE_FIELD).setPreferredWidth(DONE_FIELD_WIDTH);  // Set width of checkbox column
     jTable1.getColumnModel().getColumn(DESCRIPTION_FIELD).setPreferredWidth(DESCRIPTION_FIELD_WIDTH);  // Set width of checkbox column
     jTable1.getColumnModel().getColumn(DATE_FIELD).setPreferredWidth(DATE_FIELD_WIDTH);
-    jTable1.removeColumn(jTable1.getColumnModel().getColumn(ID_FIELD));  // Remove the ID column from the table
+    jTable1.removeColumn(jTable1.getColumnModel().getColumn(ID_FIELD)); 
     jTable1.setRowHeight(ROW_HEIGHT);
     
   }
   
   /**
-   * Do any required initialization code and subscribe
-   * to messages to which the view needs to respond
+   * Subscriptions needed for the MainView
    */
   public void init() {
     messenger.subscribe("ready", this);
@@ -82,8 +81,6 @@ public class MainView extends javax.swing.JFrame implements MessageHandler {
 
   /**
    * Loads the to do list into the tableModel to display in the table
-   * If we put the to do list's data in the table model the view will
-   * paint the table with the table model's data.
    * @param tableModel  TableModel for the jTable
    * @param list        To do list of items
    */
@@ -93,9 +90,9 @@ public class MainView extends javax.swing.JFrame implements MessageHandler {
     int size = list.size();
     tableModel.setRowCount(size);
     
-    // Look through the to do list and save the to do item fields
-    // in the table model.  The table model will see the changes
-    // and cause the table to repaint with the new data
+    // Looks through the to do list and saves the to do item fields
+    // in the table model.  The table model sees the changes
+    // and causes the table to repaint with the new data
     for (int i=0; i<size; i++) {
       ToDoItem item = (ToDoItem)(list.get(i));
       tableModel.setValueAt(item.getId(), i, ID_FIELD);
@@ -107,7 +104,7 @@ public class MainView extends javax.swing.JFrame implements MessageHandler {
 }
   
   /**
-   * Light up the edit item dialog
+   * makes item edit dialogue visible 
    * @param item Item to edit
    */
   private void editItem(ToDoItem item) {
@@ -131,7 +128,7 @@ public class MainView extends javax.swing.JFrame implements MessageHandler {
   private ToDoItem createItemFromTableModelRow(int row) {
     DefaultTableModel tableModel = (DefaultTableModel)jTable1.getModel();
     
-    // Now create a ToDoItem that we can pass to the editing dialog
+    // creates a ToDoItem that passes to the editing dialog
     // The done field is toggled when the user clicks the checkbox
     ToDoItem item = new ToDoItem(              
       (int)tableModel.getValueAt(row, ID_FIELD),
